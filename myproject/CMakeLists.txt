@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(binary_search_1 LANGUAGES CXX)
+project(myproject LANGUAGES CXX)
 
 
 # 添加应用                                    
