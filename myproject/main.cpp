@@ -1,7 +1,9 @@
-#include<iostream>
-
-int main()
+#include <iostream>
+#include <cstdlib>
+int main(int argc, char** argv)
 {
-    std::cout << "test" << std::endl;
+    int a = atoi(argv[1]);
+    int b = atoi(argv[2]);
+    std::cout << a + b << std::endl;
     return 0;
 }

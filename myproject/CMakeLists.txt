@@ -1,17 +1,10 @@
-cmake_minimum_required(VERSION 3.16)
-project(myproject LANGUAGES CXX)
+project(myproject)
 
 
-# 添加应用                                    
-add_executable(${PROJECT_NAME}
-    main.cpp
-)
+add_executable(${PROJECT_NAME} main.cpp)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC
+add_test(NAME test1_1
+                        COMMAND myproject 2 2)
 
-)
-
-target_include_directories(${PROJECT_NAME} PUBLIC
-
-
-)
+set_property (TEST test1_1
+    PROPERTY PASS_REGULAR_EXPRESSION "3")
