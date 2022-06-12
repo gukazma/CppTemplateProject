@@ -1,5 +1,7 @@
-SUBDIRLIST(subdirs ${CMAKE_CURRENT_SOURCE_DIR})
-
-foreach(subdir ${subdirs})
-    add_subdirectory(${subdir})
-endforeach()
+if(NOT TARGET gtest_main)
+    add_subdirectory(googletest)
+    set_target_properties(gtest_main PROPERTIES FOLDER Vendors/googletest)
+    set_target_properties(gtest PROPERTIES FOLDER Vendors/googletest)
+    set_target_properties(gmock PROPERTIES FOLDER Vendors/googletest)
+    set_target_properties(gmock_main PROPERTIES FOLDER Vendors/googletest)
+endif()

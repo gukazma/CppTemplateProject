@@ -1,0 +1,36 @@
+set(TARGET_NAME ExampleTest)
+# just for qt
+# set(CMAKE_AUTOUIC ON)
+# set(CMAKE_AUTOMOC ON)
+# set(CMAKE_AUTORCC ON)
+
+set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/source)
+
+file(GLOB CPP_HEAD_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
+file(GLOB CPP_SOUCE_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+# file(GLOB EDITOR_RESOURCE CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/resource/PilotEditor.rc)
+
+source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${CPP_HEAD_FILES} ${CPP_SOUCE_FILES})
+
+add_executable(${TARGET_NAME} ${CPP_HEAD_FILES} ${CPP_SOUCE_FILES})
+
+# add_compile_definitions("PILOT_ROOT_DIR=${BINARY_ROOT_DIR}")
+
+set_target_properties(${TARGET_NAME} PROPERTIES CXX_STANDARD 17 OUTPUT_NAME ${PROJECT_NAME})
+set_target_properties(${TARGET_NAME} PROPERTIES FOLDER Test)
+
+target_link_libraries(${TARGET_NAME} 
+            ${PROJECT_NAME}Runtime
+            gtest_main
+)
+
+target_include_directories(
+  ${TARGET_NAME} 
+  PUBLIC 
+#   <BUILDINTERFACE:{CMAKE_CURRENT_SOURCE_DIR}/include/>
+)
+
+add_test(
+    NAME ${TARGET_NAME}
+    COMMAND ${TARGET_NAME}
+)

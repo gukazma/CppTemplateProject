@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 
 project(AppName VERSION 0.1.0)
 
+
+option(ENABLE_TEST "Enable google test" ON)
+
+
 # just for qt
 # set(CMAKE_AUTOUIC ON)
 # set(CMAKE_AUTOMOC ON)
@@ -9,6 +13,7 @@ project(AppName VERSION 0.1.0)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 
 include(cmake/tools.cmake)
 
@@ -34,3 +39,8 @@ set(VENDORS_DIR ${CMAKE_SOURCE_DIR}/src/Vendors)
 
 
 add_subdirectory(src)
+
+if(ENABLE_TEST)
+enable_testing()
+add_subdirectory(test)
+endif()

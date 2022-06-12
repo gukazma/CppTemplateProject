@@ -1,6 +1,6 @@
 #include "Core/test.h"
 #include <iostream>
-void test()
+bool test()
 {
-    std::cout << "test" << std::endl;
+    return true;
 }
