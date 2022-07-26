@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 project(AppName VERSION 0.1.0)
 
 
-option(ENABLE_TEST "Enable google test" ON)
+option(ENABLE_TEST "Enable google test" OFF)
 
 
 # just for qt

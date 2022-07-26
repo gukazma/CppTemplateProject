@@ -1,4 +1,4 @@
-if(NOT TARGET gtest_main)
+if(NOT TARGET gtest_main AND ENABLE_TEST)
     option(gtest_disable_pthreads "Disable uses of pthreads in gtest." ON)
     add_subdirectory(googletest)
     set_target_properties(gtest_main PROPERTIES FOLDER Vendors/googletest)
