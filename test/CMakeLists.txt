@@ -1,4 +1,4 @@
-set(TARGET_NAME ExampleTest)
+set(TARGET_NAME "ExampleTest")
 # just for qt
 # set(CMAKE_AUTOUIC ON)
 # set(CMAKE_AUTOMOC ON)
@@ -16,7 +16,7 @@ add_executable(${TARGET_NAME} ${CPP_HEAD_FILES} ${CPP_SOUCE_FILES})
 
 # add_compile_definitions("PILOT_ROOT_DIR=${BINARY_ROOT_DIR}")
 
-set_target_properties(${TARGET_NAME} PROPERTIES CXX_STANDARD 17 OUTPUT_NAME ${PROJECT_NAME})
+set_target_properties(${TARGET_NAME} PROPERTIES CXX_STANDARD 17 OUTPUT_NAME ${TARGET_NAME})
 set_target_properties(${TARGET_NAME} PROPERTIES FOLDER Test)
 
 target_link_libraries(${TARGET_NAME} 
