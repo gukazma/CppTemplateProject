@@ -4,3 +4,8 @@ bool test()
 {
     return true;
 }
+
+void Foo::test()
+{
+    
+}
