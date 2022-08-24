@@ -1,0 +1,10 @@
+{
+    "cmake.configureOnEdit": false,
+    "cmake.configureArgs" : [
+        "-DCMAKE_BUILD_TYPE=Debug"
+    ],
+    "cmake.generator": "Ninja",
+    "cmake.debugConfig": {
+        "args": ["--gtest_filter=ExampleTest.SimpleFirstTest"]
+    }
+}
