@@ -3,7 +3,7 @@
     "cmake.configureArgs" : [
         "-DCMAKE_BUILD_TYPE=Debug"
     ],
-    "cmake.generator": "Ninja",
+    // "cmake.generator": "Ninja",
     "cmake.debugConfig": {
         "args": ["--gtest_filter=ExampleTest.SimpleFirstTest"]
     }
