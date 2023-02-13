@@ -43,3 +43,5 @@ Install plug-ins, ``Ctrl + Shift + P`` call ``CMake: Configure`` to generate nin
 ``CMake: Run Without Debug`` to run target, the arguements was configured in ``.vscode/settings.json``
 
 debug configure in ``.vscode/launch.json``
+
+This is Latex test in Doxygen: $\LaTeX\$
