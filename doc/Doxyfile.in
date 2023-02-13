@@ -2474,4 +2474,4 @@ DOT_CLEANUP            = YES
 
 FULL_SIDEBAR           = NO
 
-HTML_COLORSTYLE        = DARK 
+HTML_COLORSTYLE        = LIGHT
