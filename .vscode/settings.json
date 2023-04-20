@@ -1,7 +1,6 @@
 {
     "cmake.configureOnEdit": false,
     "cmake.configureArgs" : [
-        "-DCMAKE_BUILD_TYPE=Debug",
         "-DDEBUG_ARGUES=--gtest_filter=",
         "-DCMAKE_INSTALL_PREFIX:PATH=D:/ThirdParty",
         "-DCMAKE_PREFIX_PATH=D:/ThirdParty"
