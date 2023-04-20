@@ -1,11 +1,10 @@
 cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
-
-project(AppName VERSION 0.1.0)
-
+get_filename_component(ROOT_NAME ${CMAKE_SOURCE_DIR} NAME)
+message("Configure project: ${ROOT_NAME}")
+project(${ROOT_NAME} VERSION 0.1.0)
 
 option(ENABLE_TEST "Enable google test" ON)
 option(ENABLE_DOCS "Enable doxygen docs" ON)
-
 
 # just for qt
 # set(CMAKE_AUTOUIC ON)
