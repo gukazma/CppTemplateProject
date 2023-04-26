@@ -20,7 +20,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(cmake/tools.cmake)
 include(cmake/doxygen.cmake)
-
+include(cmake/dependency-graph.cmake)
+gen_dep_graph(png)
 # ---- Include guards ----
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
   message(
