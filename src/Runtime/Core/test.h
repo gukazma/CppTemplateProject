@@ -2,24 +2,22 @@
 
 /**
  * @brief test function
- * 
- * @return true 
- * @return false 
+ *
+ * @return true
+ * @return false
  */
 #include "Core/test.h"
 bool test();
 
-
 /**
  * @brief test class
- * 
+ *
  */
-class Foo
-{
-public:
+class Foo {
+  public:
     /**
      * @brief test class func
-     * 
+     *
      */
     void test();
 };
