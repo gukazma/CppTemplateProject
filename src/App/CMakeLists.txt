@@ -29,8 +29,6 @@ target_include_directories(
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
 )
 
-clang_format(format_app ${CPP_SOUCE_FILES} ${CPP_HEAD_FILES})
-
 # add_custom_command(TARGET ${TARGET_NAME} POST_BUILD
 # COMMAND ${CMAKE_COMMAND} -E make_directory "${BINARY_ROOT_DIR}"
 # COMMAND ${CMAKE_COMMAND} -E copy "${ENGINE_ROOT_DIR}/${TARGET_NAME}.ini" "${BINARY_ROOT_DIR}"

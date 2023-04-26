@@ -55,3 +55,7 @@ if(ENABLE_DOCS)
   build_docs(PROCESS_DOXYFILE TRUE DOXYFILE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in")
 endif()
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
+
+file(GLOB_RECURSE FFILES ${CMAKE_SOURCE_DIR}/src/App/*.[hc] ${CMAKE_SOURCE_DIR}/src/Runtime/*.[hc] ${CMAKE_SOURCE_DIR}/src/App/*.[hc]pp ${CMAKE_SOURCE_DIR}/src/Runtime/*.[hc]pp )
+clang_format(format ${FFILES})
+clang_tidy(-format-style=file -checks=* -header-filter='${CMAKE_SOURCE_DIR}/*')

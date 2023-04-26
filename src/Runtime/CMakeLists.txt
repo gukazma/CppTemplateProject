@@ -23,5 +23,3 @@ target_include_directories(
   PUBLIC 
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
 )
-
-clang_format(format_runtime ${SOURCE_FILES} ${HEADER_FILES})
