@@ -54,11 +54,20 @@ if(ENABLE_DOCS)
 endif()
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
 
-file(GLOB_RECURSE FFILES ${CMAKE_SOURCE_DIR}/src/App/*.[hc] ${CMAKE_SOURCE_DIR}/src/Runtime/*.[hc] ${CMAKE_SOURCE_DIR}/src/App/*.[hc]pp ${CMAKE_SOURCE_DIR}/src/Runtime/*.[hc]pp )
-clang_format(format ${FFILES})
-clang_tidy(-format-style=file -checks=* -header-filter='${CMAKE_SOURCE_DIR}/*')
-gen_dep_graph(
-"png" 
-OUTPUT_DIR "${${PROJECT_NAME}_ROOT_DIR}/out"
-TARGET_NAME "dep-graph"
-)
+
+
+if(CLANG_FORMAT_EXE)
+  message(STATUS "Found clang format ............ Configuring ..............")
+  file(GLOB_RECURSE FFILES ${CMAKE_SOURCE_DIR}/src/App/*.[hc] ${CMAKE_SOURCE_DIR}/src/Runtime/*.[hc] ${CMAKE_SOURCE_DIR}/src/App/*.[hc]pp ${CMAKE_SOURCE_DIR}/src/Runtime/*.[hc]pp )
+  clang_format(format ${FFILES})
+  add_dependencies("${PROJECT_NAME}Runtime" "format")
+endif()
+
+if(DOT_EXE)
+  message(STATUS "Found Graphviz ............ Configuring ..............")
+  gen_dep_graph(
+  "png" 
+  OUTPUT_DIR "${${PROJECT_NAME}_ROOT_DIR}/out"
+  TARGET_NAME "dep-graph"
+  )
+endif()
