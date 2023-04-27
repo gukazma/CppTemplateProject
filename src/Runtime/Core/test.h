@@ -13,8 +13,9 @@ bool test();
  * @brief test class
  *
  */
-class Foo {
-  public:
+class Foo
+{
+public:
     /**
      * @brief test class func
      *
