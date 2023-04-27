@@ -22,7 +22,6 @@ include(cmake/tools.cmake)
 include(cmake/formatting.cmake)
 include(cmake/doxygen.cmake)
 include(cmake/dependency-graph.cmake)
-gen_dep_graph(png)
 # ---- Include guards ----
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
   message(
@@ -43,7 +42,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${${PROJECT_NAME}_ROOT_DIR}/out/bin)
 # vendors dir
 set(VENDORS_DIR ${CMAKE_SOURCE_DIR}/src/Vendors)
 
-
 add_subdirectory(src)
 
 if(ENABLE_TEST)
@@ -59,3 +57,8 @@ set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
 file(GLOB_RECURSE FFILES ${CMAKE_SOURCE_DIR}/src/App/*.[hc] ${CMAKE_SOURCE_DIR}/src/Runtime/*.[hc] ${CMAKE_SOURCE_DIR}/src/App/*.[hc]pp ${CMAKE_SOURCE_DIR}/src/Runtime/*.[hc]pp )
 clang_format(format ${FFILES})
 clang_tidy(-format-style=file -checks=* -header-filter='${CMAKE_SOURCE_DIR}/*')
+gen_dep_graph(
+"png" 
+OUTPUT_DIR "${${PROJECT_NAME}_ROOT_DIR}/out"
+TARGET_NAME "dep-graph"
+)
