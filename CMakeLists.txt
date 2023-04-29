@@ -18,7 +18,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # set(DOXYFILE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in" CACHE STRING INTERNAL FORCE)
 
-include(cmake/tools.cmake)
 include(cmake/formatting.cmake)
 include(cmake/doxygen.cmake)
 include(cmake/dependency-graph.cmake)
