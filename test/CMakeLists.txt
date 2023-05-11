@@ -1,4 +1,6 @@
 set(TARGET_NAME "TEST")
+
+enable_testing()
 # just for qt
 # set(CMAKE_AUTOUIC ON)
 # set(CMAKE_AUTOMOC ON)

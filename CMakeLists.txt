@@ -3,9 +3,9 @@ get_filename_component(ROOT_NAME ${CMAKE_SOURCE_DIR} NAME)
 message("Configure project: ${ROOT_NAME}")
 project(${ROOT_NAME} VERSION 0.1.0)
 
-option(ENABLE_TEST "Enable google test" ON)
 option(ENABLE_DOCS "Enable doxygen docs" ON)
 
+add_subdirectory(External)
 # just for qt
 # set(CMAKE_AUTOUIC ON)
 # set(CMAKE_AUTOMOC ON)
@@ -43,10 +43,7 @@ set(VENDORS_DIR ${CMAKE_SOURCE_DIR}/src/Vendors)
 
 add_subdirectory(src)
 
-if(ENABLE_TEST)
-enable_testing()
 add_subdirectory(test)
-endif()
 
 if(ENABLE_DOCS)
   build_docs(PROCESS_DOXYFILE TRUE DOXYFILE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in")
