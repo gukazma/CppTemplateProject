@@ -23,7 +23,8 @@ set_target_properties(${TARGET_NAME} PROPERTIES FOLDER Test)
 set_target_properties(${TARGET_NAME} PROPERTIES VS_DEBUGGER_COMMAND_ARGUMENTS "${DEBUG_ARGUES}")
 
 target_link_libraries(${TARGET_NAME} 
-            ${PROJECT_NAME}Runtime
+      PRIVATE
+            ${PROJECT_NAME}
             gtest_main
 )
 

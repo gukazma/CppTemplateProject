@@ -1,4 +1,4 @@
-set(TARGET_NAME ${PROJECT_NAME})
+set(TARGET_NAME "${PROJECT_NAME}_App")
 # just for qt
 # set(CMAKE_AUTOUIC ON)
 # set(CMAKE_AUTOMOC ON)
@@ -21,7 +21,7 @@ set_target_properties(${TARGET_NAME} PROPERTIES FOLDER ${PROJECT_NAME})
 
 target_compile_options(${TARGET_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/WX->")
 
-target_link_libraries(${TARGET_NAME} ${PROJECT_NAME}Runtime)
+target_link_libraries(${TARGET_NAME} PRIVATE ${PROJECT_NAME})
 
 target_include_directories(
   ${TARGET_NAME} 
