@@ -1,11 +1,6 @@
 {
     "cmake.configureOnEdit": false,
     "cmake.configureArgs" : [
-        "-DDEBUG_ARGUES=--gtest_filter=Module.Function",
-        "-DCMAKE_INSTALL_PREFIX:PATH=D:/ThirdParty",
         "-DCMAKE_PREFIX_PATH=D:/ThirdParty"
     ],
-    "cmake.debugConfig": {
-        "args": ["--gtest_filter=MYTEST0.A"]
-    }
 }
