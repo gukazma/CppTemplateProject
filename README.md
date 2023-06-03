@@ -1,12 +1,19 @@
-# my_cpp_empty_project
+# Cpp Template Project
 
-## option dependency
+## Optional dependencies
 [llvm-project](https://github.com/llvm/llvm-project/releases)
 
+Clang format formatting code
 
 [Graphviz](https://graphviz.org/download/)
 
-## how to use it
+Generate library dependency graph
+
+[Doxygen](https://www.doxygen.nl/download.html)
+
+Generate Code Document
+
+## How to use it
 ```bash
 # clone repository and submodule
 
