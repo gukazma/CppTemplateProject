@@ -5,8 +5,7 @@
         "-DCMAKE_INSTALL_PREFIX:PATH=D:/ThirdParty",
         "-DCMAKE_PREFIX_PATH=D:/ThirdParty"
     ],
-    // "cmake.generator": "Ninja",
     "cmake.debugConfig": {
-        "args": ["--gtest_filter=LibName_TEST.TEST0"]
+        "args": ["--gtest_filter=MYTEST0.A"]
     }
 }
