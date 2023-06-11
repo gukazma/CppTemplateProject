@@ -4,11 +4,7 @@
     {
       "name": "VS2022-Win64",
       "generator": "Visual Studio 17 2022",
-      "vendor": {
-          "jetbrains.com/clion": {
-              "toolchain": "Visual Studio 2022 x64"
-          }
-      }
+      "binaryDir": "${sourceDir}/Build/Output/${presetName}"
     }
   ]
 }
