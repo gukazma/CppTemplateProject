@@ -34,24 +34,26 @@ add_subdirectory(Apps)
 add_subdirectory(Tests)
 
 if(ENABLE_DOCS)
-  build_docs(PROCESS_DOXYFILE TRUE DOXYFILE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Docs/Doxyfile.in")
+  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../Docs)
+  build_docs(PROCESS_DOXYFILE TRUE DOXYFILE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Docs/Doxyfile.in)
 endif()
-set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "${PROJECT_NAME}DemoApp")
+set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME}DemoApp)
 
 if(CLANG_FORMAT_EXE)
   message(STATUS "Found clang format ............ Configuring ..............")
   file(GLOB_RECURSE FFILES ${CMAKE_SOURCE_DIR}/Modules/*.[hc] ${CMAKE_SOURCE_DIR}/Modules/*.[hc]pp )
-  clang_format(format ${FFILES})
-  add_dependencies(${PROJECT_NAME}Primitives format)
-  set_target_properties(format PROPERTIES FOLDER Tools)
+  clang_format(${PROJECT_NAME}Format ${FFILES})
+  # add_dependencies(${PROJECT_NAME}Primitives format)
+  set_target_properties(${PROJECT_NAME}Format PROPERTIES FOLDER Tools)
 endif()
 
 if(DOT_EXE)
   message(STATUS "Found Graphviz ............ Configuring ..............")
+  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../Docs/DependencyGraph)
   gen_dep_graph(
-    "png" 
-    OUTPUT_DIR "${${PROJECT_NAME}_ROOT_DIR}/out"
-    TARGET_NAME "dep-graph"
+    png 
+    OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/../Docs/DependencyGraph
+    TARGET_NAME ${PROJECT_NAME}DependencyGraph
   )
-  set_target_properties(dep-graph PROPERTIES FOLDER Tools)
+  set_target_properties(${PROJECT_NAME}DependencyGraph PROPERTIES FOLDER Tools)
 endif()

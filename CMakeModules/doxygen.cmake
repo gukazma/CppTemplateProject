@@ -94,15 +94,18 @@ function(build_docs)
     if(build_docs_TARGET_NAME)
       set(TARGET_NAME ${build_docs_TARGET_NAME})
     else()
-      set(TARGET_NAME doc-${PROJECT_NAME})
+      set(TARGET_NAME ${PROJECT_NAME}Docs)
     endif()
-
+    
     add_custom_target(
       ${TARGET_NAME}
       COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYFILE}
       WORKING_DIRECTORY ${OUT_DIR}
       VERBATIM)
-
+    set_target_properties(${TARGET_NAME}
+        PROPERTIES
+            FOLDER Tools
+    )
     if(build_docs_ADD_TO_DOC)
       if(NOT TARGET doc)
         add_custom_target(doc)
@@ -116,7 +119,7 @@ function(build_docs)
         set(build_docs_INSTALL_PATH share/${PROJECT_NAME})
       endif()
       install(
-        DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doc/
+        DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/Docs
         COMPONENT documentation
         DESTINATION ${build_docs_INSTALL_PATH})
     endif()
