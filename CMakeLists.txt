@@ -4,6 +4,7 @@ message("Configure project: ${ROOT_NAME}")
 project(${ROOT_NAME} VERSION 0.1.0)
 
 option(ENABLE_DOCS "Enable doxygen docs" ON)
+option(PRECOMPILED_HEADERS_ENABLED "Enable generate precompile headers" ON)
 
 add_subdirectory(External)
 # just for qt

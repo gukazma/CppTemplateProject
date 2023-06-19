@@ -1,36 +1,49 @@
-set(TARGET_NAME "${PROJECT_NAME}_Core")
+if (NOT PRECOMPILED_HEADERS_ENABLED)
+    return()
+endif()
 
-file(GLOB_RECURSE HEADER_FILES "*.h")
-file(GLOB_RECURSE CPP_FILES "*.cpp")
+set(TARGET_NAME MethaneCommonPrecompiledHeaders)
+if (WIN32)
+    list(APPEND PRECOMPILED_HEADERS
+        <windows.h>
+        <wrl.h>
+    )
+endif()
 
-source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${HEADER_FILES} ${CPP_FILES})
+list(APPEND PRECOMPILED_HEADERS
+    # containers
+    <iterator>
+    <set>
+    <unordered_set>
+    <map>
+    <unordered_map>
+    <list>
+    <vector>
+)
 
-add_library(${TARGET_NAME} ${HEADER_FILES} ${CPP_FILES})
-add_library("${PROJECT_NAME}::Core" ALIAS ${TARGET_NAME})
+add_library(${TARGET_NAME} STATIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sources/LibName/PrecompiledHeaders.cpp
+)
 
-set_target_properties(${TARGET_NAME} PROPERTIES CXX_STANDARD 17)
-set_target_properties(${TARGET_NAME} PROPERTIES FOLDER Modules)
-
+target_link_libraries(${TARGET_NAME}
+    PUBLIC
+        ${PRECOMPILED_LIBS}
+)
+target_include_directories(${TARGET_NAME} PRIVATE 
+    ${CMAKE_CURRENT_SOURCE_DIR}/Inlcude]
+)
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(${TARGET_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
 target_compile_options(${TARGET_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/WX->")
-
-# Link dependencies    
-target_link_libraries(${TARGET_NAME} PUBLIC
-          )
-
-target_include_directories(
-  ${TARGET_NAME} 
-  PUBLIC 
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Include>
+target_precompile_headers(${TARGET_NAME}
+    PUBLIC
+        ${PRECOMPILED_HEADERS}
 )
 
-if(PRECOMPILED_HEADERS_ENABLED)
-    target_precompile_headers(${TARGET_NAME} REUSE_FROM MethaneCommonPrecompiledHeaders)
-    target_link_libraries(${TARGET_NAME} PUBLIC
-    MethaneCommonPrecompiledHeaders
-          )
-endif()
+set_target_properties(${TARGET_NAME}
+    PROPERTIES
+        FOLDER Modules/Common
+)
 
 packageProject(
   # the name of the target to export
