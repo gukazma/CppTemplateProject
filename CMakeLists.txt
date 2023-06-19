@@ -36,7 +36,7 @@ add_subdirectory(Tests)
 if(ENABLE_DOCS)
   build_docs(PROCESS_DOXYFILE TRUE DOXYFILE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Docs/Doxyfile.in")
 endif()
-set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "${PROJECT_NAME}_App")
+set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT "${PROJECT_NAME}DemoApp")
 
 if(CLANG_FORMAT_EXE)
   message(STATUS "Found clang format ............ Configuring ..............")
