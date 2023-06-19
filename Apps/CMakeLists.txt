@@ -16,7 +16,7 @@ set_target_properties(${TARGET_NAME} PROPERTIES FOLDER Apps)
 
 target_compile_options(${TARGET_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/WX->")
 
-target_link_libraries(${TARGET_NAME} PRIVATE "${PROJECT_NAME}::Core")
+target_link_libraries(${TARGET_NAME} PRIVATE ${PROJECT_NAME}::Primitives)
 
 target_include_directories(
   ${TARGET_NAME} 

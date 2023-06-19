@@ -42,7 +42,7 @@ if(CLANG_FORMAT_EXE)
   message(STATUS "Found clang format ............ Configuring ..............")
   file(GLOB_RECURSE FFILES ${CMAKE_SOURCE_DIR}/Modules/*.[hc] ${CMAKE_SOURCE_DIR}/Modules/*.[hc]pp )
   clang_format(format ${FFILES})
-  add_dependencies("${PROJECT_NAME}_Core" "format")
+  add_dependencies(${PROJECT_NAME}Primitives format)
   set_target_properties(format PROPERTIES FOLDER Tools)
 endif()
 

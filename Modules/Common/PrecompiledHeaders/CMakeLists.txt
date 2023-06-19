@@ -2,7 +2,7 @@ if (NOT PRECOMPILED_HEADERS_ENABLED)
     return()
 endif()
 
-set(TARGET_NAME MethaneCommonPrecompiledHeaders)
+set(TARGET_NAME ${PROJECT_NAME}CommonPrecompiledHeaders)
 if (WIN32)
     list(APPEND PRECOMPILED_HEADERS
         <windows.h>
@@ -24,6 +24,7 @@ list(APPEND PRECOMPILED_HEADERS
 add_library(${TARGET_NAME} STATIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Sources/LibName/PrecompiledHeaders.cpp
 )
+add_library(${PROJECT_NAME}::CommonPrecompiledHeaders ALIAS ${TARGET_NAME})
 
 target_link_libraries(${TARGET_NAME}
     PUBLIC
