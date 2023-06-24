@@ -1,6 +1,6 @@
+#include <LibName/Timer.hpp>
 #include <iostream>
 #include <thread>
-#include <LibName/Timer.hpp>
 int main(int argc, char* argv[])
 {
     LibName::Timer timer;

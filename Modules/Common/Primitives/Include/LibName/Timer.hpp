@@ -2,9 +2,9 @@
  * @Author       : gukazma && gukazma@proton.me
  * @Date         : 2023-06-24 14:39:17
  * @FilePath     : \CppTemplateProject\Modules\Common\Primitives\Include\LibName\Timer.hpp
- * @Description  : The Timer class uses the high-resolution clock from the C++ standard library to measure elapsed time
- * MIT License
- * 
+ * @Description  : The Timer class uses the high-resolution clock from the C++ standard library to
+ * measure elapsed time MIT License
+ *
  * Copyright (c) 2023 gukazma
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files, to deal
@@ -12,11 +12,11 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
- * 
+ *
+ *
  */
 #pragma once
 
