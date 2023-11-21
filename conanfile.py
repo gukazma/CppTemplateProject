@@ -2,7 +2,7 @@ from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
 
 
-class helloRecipe(ConanFile):
+class CppTemplateProjectRecipe(ConanFile):
     name = "CppTemplateProject"
     version = "1.0"
     package_type = "library"
