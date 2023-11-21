@@ -35,14 +35,11 @@ Generate Code Document
 
 ## How to use it
 ```bash
-# clone repository and submodule
+pip install conan=1.62
 
 git clone https://github.com/geekgary-x/CppTemplateProject.git
 
-# create buid dir
+conan install . --build=missing -s build_type=RelWithDebInfo
+conan build .
 
-mkdir build && cd build
-
-# generate build project
-cmake ..
 ```
