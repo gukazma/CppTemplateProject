@@ -6,7 +6,6 @@ project(${ROOT_NAME} VERSION 0.1.0)
 option(ENABLE_DOCS "Enable doxygen docs" ON)
 option(PRECOMPILED_HEADERS_ENABLED "Enable generate precompile headers" ON)
 
-add_subdirectory(External)
 # just for qt
 # set(CMAKE_AUTOUIC ON)
 # set(CMAKE_AUTOMOC ON)
@@ -46,7 +45,6 @@ if(CLANG_FORMAT_EXE)
   file(GLOB_RECURSE FFILES ${CMAKE_SOURCE_DIR}/Modules/*.[hc] ${CMAKE_SOURCE_DIR}/Modules/*.[hc]pp ${CMAKE_SOURCE_DIR}/Apps/*.[hc] ${CMAKE_SOURCE_DIR}/Apps/*.[hc]pp)
   clang_format(${PROJECT_NAME}Format ${FFILES})
   set_target_properties(${PROJECT_NAME}Format PROPERTIES FOLDER Tools)
-  add_dependencies(${PROJECT_NAME}CommonPrecompiledHeaders ${PROJECT_NAME}Format)
 endif()
 
 if(DOT_EXE)
