@@ -18,7 +18,7 @@ class CppTemplateProjectRecipe(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
-
+    
     # Sources are located in the same place as this recipe, copy them to the recipe
     exports_sources = "CMakeLists.txt", "Modules/*", "Modules/*"
 
@@ -27,6 +27,8 @@ class CppTemplateProjectRecipe(ConanFile):
             self.options.rm_safe("fPIC")
     def requirements(self):
         self.requires("gtest/1.14.0")
+        self.requires("zlib/1.3")
+        self.options["zlib"].shared = True
         
     def configure(self):
         if self.options.shared:
@@ -54,5 +56,4 @@ class CppTemplateProjectRecipe(ConanFile):
         self.cpp_info.libs = ["CppTemplateProject"]
 
     def imports(self):
-        self.copy("*", "./bin", "bin")
-        self.copy("*", "./bin", "lib")
+        self.copy("*", "./build/bin", "bin")
