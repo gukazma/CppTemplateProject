@@ -39,7 +39,7 @@ pip install conan=1.62
 
 git clone https://github.com/geekgary-x/CppTemplateProject.git
 
-conan install . --build=missing -s build_type=RelWithDebInfo
+conan install . --build=missing
 conan build .
 
 ```
