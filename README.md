@@ -35,11 +35,13 @@ Generate Code Document
 
 ## How to use it
 ```bash
-pip install conan=1.62
+pip install conan==1.62
 
 git clone https://github.com/geekgary-x/CppTemplateProject.git
 
-conan install . --build=missing
-conan build .
+mkdir build
 
+cd build
+
+cmake ..
 ```
