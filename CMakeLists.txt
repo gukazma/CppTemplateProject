@@ -12,25 +12,26 @@ if (NOT CMAKE_BUILD_TYPE)
     message(STATUS "No CMAKE_BUILD_TYPE selected, defaulting to ${CMAKE_BUILD_TYPE}")
 endif ()
 
-project(CppTemplateProject VERSION 0.1 LANGUAGES CXX)
+project(QtWithConan VERSION 0.1 LANGUAGES CXX)
 
-if (NOT EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-    include(CMakeModules/conan.cmake)
-    if (CONAN_PROFILE_BUILD AND CONAN_PROFILE_HOST)
-    conan_cmake_install(PATH_OR_REFERENCE .. BUILD missing
-                        SETTINGS_HOST build_type=${CMAKE_BUILD_TYPE}
-                        SETTINGS_BUILD build_type=${CMAKE_BUILD_TYPE}
-                        PROFILE_BUILD ${CONAN_PROFILE_BUILD}
-                        PROFILE_HOST ${CONAN_PROFILE_HOST})
-                        # ENV_HOST CONAN_CMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE})
-    else ()
-        conan_cmake_autodetect(settings)
-        conan_cmake_install(PATH_OR_REFERENCE .. BUILD missing SETTINGS ${settings})
-    endif ()
+include(CMakeModules/conan.cmake)
+if (CONAN_PROFILE_BUILD AND CONAN_PROFILE_HOST)
+conan_cmake_install(PATH_OR_REFERENCE .. BUILD missing
+                    SETTINGS_HOST build_type=${CMAKE_BUILD_TYPE}
+                    SETTINGS_BUILD build_type=${CMAKE_BUILD_TYPE}
+                    PROFILE_BUILD ${CONAN_PROFILE_BUILD}
+                    PROFILE_HOST ${CONAN_PROFILE_HOST})
+                    # ENV_HOST CONAN_CMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE})
+else ()
+    conan_cmake_autodetect(settings)
+    conan_cmake_install(PATH_OR_REFERENCE .. BUILD missing SETTINGS ${settings})
 endif ()
 
+# 在 conan_cmake_install 执行后，会在 CMAKE_BINARY_DIR 目录下生成 cmake 的配置信息和 Qt 的依赖库路径信息，我们将其引入到 CMake 工程中，并调用 conan_basic_setup 来自动配置各个环境变量信息。
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+conan_basic_setup(KEEP_RPATHS)
+
 
 option(ENABLE_DOCS "Enable doxygen docs" ON)
 # just for qt

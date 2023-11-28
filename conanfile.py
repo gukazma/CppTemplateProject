@@ -1,30 +1,23 @@
-from conan import ConanFile
-from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
+from conans import ConanFile, tools
+import platform
 
 
-class CppTemplateProjectRecipe(ConanFile):
-    name = "CppTemplateProject"
-    version = "1.0"
+class ModuleConan(ConanFile):
+    name = "QtConanExample"
+    description = "An example for Qt with Conan"
     settings = "os", "compiler", "build_type", "arch"
-    generators = "cmake", "cmake_find_package_multi", "cmake_paths"
+    generators = "qt", "cmake", "cmake_find_package_multi", "cmake_paths"
+    default_options = {
+        "qt:shared": True,
+        "qt:qttools": True
+    }
 
-    exports_sources = "CMakeLists.txt", "Modules/*", "Modules/*"
-    def requirements(self):
-        self.requires("gtest/1.14.0")
-        self.requires("zlib/1.3")
-        self.options["zlib"].shared = True
     def configure(self):
         del self.settings.compiler.cppstd
-    def build(self):
-        cmake = CMake(self)
-        cmake.configure()
-        cmake.build()
-    def package(self):
-        cmake = CMake(self)
-        cmake.install()
 
-    def package_info(self):
-        self.cpp_info.libs = ["CppTemplateProject"]
-
+    def requirements(self):
+        self.requires("gtest/1.14.0")
+        self.requires("qt/5.15.3")
+        
     def imports(self):
         self.copy("*.dll", "./bin", "bin")

@@ -1,16 +1,3 @@
 {
-    "cmake.configureOnEdit": false,
-    "cmake.configureArgs" : [
-        "-DCMAKE_PREFIX_PATH=D:/ThirdParty"
-    ],
-    "fileheader.customMade": {
-        "Author": "gukazma && gukazma@proton.me", 
-        "Date": "Do not edit", 
-        "FilePath": "Do not edit",
-        "Description": "",
-        "custom_string_obkoro1_copyright": "MIT License\n\nCopyright (c) ${now_year} gukazma\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files, to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\n"
-    },
-    "fileheader.configObj": {
-        "wideSame": true,
-    }
+    "cmake.configureOnEdit": false
 }
