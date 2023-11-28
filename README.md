@@ -37,8 +37,6 @@ Generate Code Document
 ```bash
 pip install conan==1.62
 
-git clone https://github.com/geekgary-x/CppTemplateProject.git
-
 mkdir build
 
 cd build
