@@ -24,7 +24,11 @@ conan_cmake_install(PATH_OR_REFERENCE .. BUILD missing
                     # ENV_HOST CONAN_CMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE})
 else ()
     conan_cmake_autodetect(settings)
-    conan_cmake_install(PATH_OR_REFERENCE .. BUILD missing SETTINGS ${settings})
+    if(CONAN_REMOTE)
+      conan_cmake_install(PATH_OR_REFERENCE .. BUILD missing SETTINGS ${settings} REMOTE ${CONAN_REMOTE})
+    else()
+      conan_cmake_install(PATH_OR_REFERENCE .. BUILD missing SETTINGS ${settings})
+    endif()
 endif ()
 
 # 在 conan_cmake_install 执行后，会在 CMAKE_BINARY_DIR 目录下生成 cmake 的配置信息和 Qt 的依赖库路径信息，我们将其引入到 CMake 工程中，并调用 conan_basic_setup 来自动配置各个环境变量信息。

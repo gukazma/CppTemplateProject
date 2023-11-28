@@ -1,3 +1,6 @@
 {
-    "cmake.configureOnEdit": false
+    "cmake.configureOnEdit": false,
+    "cmake.configureArgs" : [
+        "-DCONAN_REMOTE=artifactory"
+    ]
 }
