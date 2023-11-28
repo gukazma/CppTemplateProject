@@ -1,11 +1,38 @@
-cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
-get_filename_component(ROOT_NAME ${CMAKE_SOURCE_DIR} NAME)
-message("Configure project: ${ROOT_NAME}")
-project(${ROOT_NAME} VERSION 0.1.0)
+cmake_minimum_required(VERSION 3.18)
+
+# 设置基础环境
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
+# 设置默认的编译配置为 Debug，conan.cmake 需要确定你当前正在使用哪种编译配置以决定如何下载和编译三方库
+if (NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build." FORCE)
+    message(STATUS "No CMAKE_BUILD_TYPE selected, defaulting to ${CMAKE_BUILD_TYPE}")
+endif ()
+
+project(CppTemplateProject VERSION 0.1 LANGUAGES CXX)
+
+if (NOT EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+    include(CMakeModules/conan.cmake)
+    if (CONAN_PROFILE_BUILD AND CONAN_PROFILE_HOST)
+    conan_cmake_install(PATH_OR_REFERENCE .. BUILD missing
+                        SETTINGS_HOST build_type=${CMAKE_BUILD_TYPE}
+                        SETTINGS_BUILD build_type=${CMAKE_BUILD_TYPE}
+                        PROFILE_BUILD ${CONAN_PROFILE_BUILD}
+                        PROFILE_HOST ${CONAN_PROFILE_HOST})
+                        # ENV_HOST CONAN_CMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE})
+    else ()
+        conan_cmake_autodetect(settings)
+        conan_cmake_install(PATH_OR_REFERENCE .. BUILD missing SETTINGS ${settings})
+    endif ()
+endif ()
+
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
 
 option(ENABLE_DOCS "Enable doxygen docs" ON)
-option(PRECOMPILED_HEADERS_ENABLED "Enable generate precompile headers" ON)
-
 # just for qt
 # set(CMAKE_AUTOUIC ON)
 # set(CMAKE_AUTOMOC ON)
@@ -18,7 +45,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_DEBUG_POSTFIX "d")
 set(CMAKE_RELEASE_POSTFIX "") 
 # your thirdparty cmake scripts
-set(CMAKE_MODULE_PATH "D:/ThirdParty/cmake" ${CMAKE_MODULE_PATH})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin)
 
