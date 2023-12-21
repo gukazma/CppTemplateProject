@@ -85,6 +85,6 @@ jobs:
         with:
           repo_token: ${{ secrets.TOKEN }}
           file: ${{ github.workspace }}/build/bin/${{ matrix.config.artifact }}.zip
-          tag: ${{ env.RELEASE_TITLE }}
+          tag: v1.0
           overwrite: true
-          body:  "${{ steps.ghpages.outputs.content }}"
+          body:  "${{ steps.package.outputs.content }}"

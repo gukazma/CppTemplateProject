@@ -1,4 +1,4 @@
-# v1.0 update ci/cd scripts
+# v1.0
 
 * Update ci/cd scripts
 
