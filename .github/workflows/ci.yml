@@ -80,6 +80,6 @@ jobs:
         with:
           repo_token: ${{ secrets.TOKEN }}
           file: ${{ github.workspace }}/build/bin/${{ matrix.config.artifact }}.zip
-          tag: ${{ steps.read_release.outputs.RELEASE_TITLE }}
+          tag: ${{ env.RELEASE_TITLE }}"
           overwrite: true
           body: "body"
