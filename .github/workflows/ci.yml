@@ -56,7 +56,7 @@ jobs:
           gcc --version
 
       - name: Use cmake
-        run: cmake  -S./ -B./build && cmake --build ./build --config Debug
+        run: cmake  -S./ -B./build -D CMAKE_BUILD_TYPE=${{ matrix.config.build_type }} && cmake --build ./build --config ${{ matrix.config.build_type }}
 
       - name: Archive Release
         uses: thedoctor0/zip-release@0.7.5
