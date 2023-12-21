@@ -17,23 +17,14 @@ jobs:
         - {
             name: "Windows Latest MSVC",
             os: windows-latest,
-            artifact: "windows_msvc.7z",
+            artifact: "windows_msvc",
             build_type: "Release",
-            cc: "cl",
-            cxx: "cl",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat",
-            archiver: "7z a",
-            generators: "Visual Studio 16 2019"
           }
         - {
             name: "Ubuntu_Latest_GCC",
             os: ubuntu-latest,
             artifact: "ubuntu_gcc",
             build_type: "Release",
-            cc: "gcc",
-            cxx: "g++",
-            archiver: "7z a",
-            generators: "Ninja"
           }
     steps:
       - uses: actions/checkout@v3
@@ -77,11 +68,29 @@ jobs:
           name: ${{ matrix.config.artifact }}
           path: ${{ github.workspace }}/build/bin/${{ matrix.config.artifact }}.zip
       
+      - name: Read release.md and use it as a body of new release
+        id: read_release
+        shell: bash
+        run: |
+          title=$(awk '/^#[^#]/ { print substr($0, 2); exit }' RELEASE.md)
+          echo "RELEASE_TITLE=$title" >> $GITHUB_ENV
+      - name: Read RELEASE.md
+        id: release
+        uses: jaywcjlove/github-action-read-file@main
+        with:
+          path: RELEASE.md
+      
+      - name: Read VERSION
+        id: version
+        uses: jaywcjlove/github-action-read-file@main
+        with:
+          path: VERSION
+
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.TOKEN }}
           file: ${{ github.workspace }}/build/bin/${{ matrix.config.artifact }}.zip
-          tag: ${{ github.ref }}
+          tag: "${{ steps.version.outputs.content }}"
           overwrite: true
-          body: "This is my release text"
+          body:  "${{ steps.release.outputs.content }}"
