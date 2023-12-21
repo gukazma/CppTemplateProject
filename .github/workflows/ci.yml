@@ -68,6 +68,20 @@ jobs:
           name: ${{ matrix.config.artifact }}
           path: ${{ github.workspace }}/build/bin/${{ matrix.config.artifact }}.zip
       
+      - name: Read release.md and use it as a body of new release
+        id: read_release
+        shell: bash
+        run: |
+          r=$(cat RELEASE.md)                       # <--- Read release.md (Provide correct path as per your repo)
+          r="${r//'%'/'%25'}"                               # Multiline escape sequences for %
+          r="${r//$'\n'/'%0A'}"                             # Multiline escape sequences for '\n'
+          r="${r//$'\r'/'%0D'}"                             # Multiline escape sequences for '\r'
+          echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT          # <--- Set environment variable
+          title=$(awk '/^#[^#]/ { print substr($0, 2); exit }' RELEASE.md)
+          echo "RELEASE_TITLE=$title" >> $GITHUB_ENV
+          echo $r
+          echo $title
+      
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
