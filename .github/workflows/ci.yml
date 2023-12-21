@@ -74,16 +74,12 @@ jobs:
         run: |
           title=$(awk '/^#[^#]/ { print substr($0, 2); exit }' RELEASE.md)
           echo "RELEASE_TITLE=$title" >> $GITHUB_ENV
-          content=$(tail -n +2 RELEASE.md)
-          echo "RELEASE_CONTENT=$content" >> $GITHUB_ENV
-          echo $title
-          echo $content
       
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.TOKEN }}
           file: ${{ github.workspace }}/build/bin/${{ matrix.config.artifact }}.zip
-          tag: $title
+          tag: ${{ steps.read_release.outputs.RELEASE_TITLE }}
           overwrite: true
-          body: $content
+          body: "body"
