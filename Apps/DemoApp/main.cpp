@@ -1,13 +1,9 @@
-#include <QApplication>
-#include "MainWindow.h"
-
-int main(int argc, char** argv)
+#include <iostream>
+#include <thread>
+#include <LibName/Timer.hpp>
+int main(int argc, char* argv[])
 {
-    QApplication app(argc, argv);
-
-    MainWindow mainwinndow;
-
-    mainwinndow.show();
-
-    return app.exec();
+    LibName::Timer timer;
+    std::this_thread::sleep_for(std::chrono::microseconds(100));
+    std::cout << "Sleep for: " << timer.GetElapsedSecondsD() << std::endl;
 }

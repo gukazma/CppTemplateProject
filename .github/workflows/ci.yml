@@ -1,0 +1,65 @@
+name: ci/cd
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    # The type of runner that the job will run on
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }} 
+    strategy:
+      fail-fast: false
+      matrix:
+        config: 
+        - {
+            name: "Ubuntu_Latest_GCC",
+            os: ubuntu-latest,
+            artifact: "ubuntu_gcc",
+            build_type: "Release",
+            cc: "gcc",
+            cxx: "g++",
+            archiver: "7z a",
+            generators: "Ninja"
+          }
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Conan
+        id: conan
+        uses: turtlebrowser/get-conan@main
+        with:
+          version: 1.62.0
+      - name: Conan version
+        run: echo "${{ steps.conan.outputs.version }}"
+
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.14
+        with:
+          cmake-version: '3.16.x'
+
+      - name: Use cmake
+        run: cmake  -S./ -B./build && cmake --build ./build --config Debug
+
+      - name: Archive Release
+        uses: thedoctor0/zip-release@0.7.5
+        with:
+          type: 'zip'
+          filename: ${{ matrix.config.artifact }}.zip
+          directory: ${{ github.workspace }}/build/bin
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.config.artifact }}
+          path: ${{ github.workspace }}/build/bin/${{ matrix.config.artifact }}.zip
+      
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.TOKEN }}
+          file: ${{ github.workspace }}/build/bin/${{ matrix.config.artifact }}.zip
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is my release text"

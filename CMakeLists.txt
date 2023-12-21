@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.16)
 
 # 设置基础环境
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -31,7 +31,7 @@ endif ()
 # 在 conan_cmake_install 执行后，会在 CMAKE_BINARY_DIR 目录下生成 cmake 的配置信息和 Qt 的依赖库路径信息，我们将其引入到 CMake 工程中，并调用 conan_basic_setup 来自动配置各个环境变量信息。
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
-conan_basic_setup(KEEP_RPATHS)
+conan_basic_setup(TARGETS)
 
 
 option(ENABLE_DOCS "Enable doxygen docs" ON)

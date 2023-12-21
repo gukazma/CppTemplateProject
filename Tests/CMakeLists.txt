@@ -22,12 +22,10 @@ set_target_properties(${TARGET_NAME} PROPERTIES CXX_STANDARD 17 OUTPUT_NAME ${TA
 set_target_properties(${TARGET_NAME} PROPERTIES FOLDER Test)
 set_target_properties(${TARGET_NAME} PROPERTIES VS_DEBUGGER_COMMAND_ARGUMENTS "${DEBUG_ARGUES}")
 
-find_package(GTest REQUIRED)
-
 target_link_libraries(${TARGET_NAME} 
       PRIVATE
             ${PROJECT_NAME}::Primitives
-            GTest::gtest_main
+            CONAN_PKG::gtest
 )
 
 target_include_directories(
