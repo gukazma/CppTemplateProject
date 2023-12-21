@@ -74,6 +74,8 @@ jobs:
         run: |
           title=$(awk '/^#[^#]/ { print substr($0, 2); exit }' RELEASE.md)
           echo "RELEASE_TITLE=$title" >> $GITHUB_ENV
+          content=$(tail -n +2 RELEASE.md)
+          echo "RELEASE_CONTENT=$content" >> $GITHUB_ENV
       
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
@@ -82,4 +84,4 @@ jobs:
           file: ${{ github.workspace }}/build/bin/${{ matrix.config.artifact }}.zip
           tag: ${{ env.RELEASE_TITLE }}
           overwrite: true
-          body: "body"
+          body: ${{ env.RELEASE_CONTENT }}

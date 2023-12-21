@@ -1,3 +1,3 @@
-# 更新ci脚本，能够读取更新文本
+# v1.0 update ci/cd scripts
 
-* 更新ci脚本
+1. update ci/cd scripts
