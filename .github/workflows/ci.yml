@@ -74,9 +74,12 @@ jobs:
         run: |
           title=$(awk '/^#[^#]/ { print substr($0, 2); exit }' RELEASE.md)
           echo "RELEASE_TITLE=$title" >> $GITHUB_ENV
-          content=$(tail -n +2 RELEASE.md)
-          echo "RELEASE_BODY=$content" >> $GITHUB_ENV
-      
+      - name: Read RELEASE.md
+        id: package
+        uses: jaywcjlove/github-action-read-file@main
+        with:
+          path: RELEASE.md
+
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -84,4 +87,4 @@ jobs:
           file: ${{ github.workspace }}/build/bin/${{ matrix.config.artifact }}.zip
           tag: ${{ env.RELEASE_TITLE }}
           overwrite: true
-          body:  ${{ steps.read_release.outputs.RELEASE_BODY }}
+          body:  "${{ steps.ghpages.outputs.content }}"
