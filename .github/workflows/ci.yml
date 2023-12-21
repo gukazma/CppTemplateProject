@@ -70,20 +70,18 @@ jobs:
       
       - name: Read release.md and use it as a body of new release
         id: read_release
-        shell: bash
         run: |
-          title=$(awk '/^#[^#]/ { print substr($0, 2); exit }' RELEASE.md)
-          echo "RELEASE_TITLE=$title" >> $GITHUB_ENV
-          content=$(awk -v t="$title" 'BEGIN{IGNORECASE=1} $0 ~ "^#" t { p = 1; next } p && /^$/ { exit } p' RELEASE.md)
-          echo "RELEASE_CONTENT=$content" >> $GITHUB_ENV
-          echo $title
-          echo $content
+          content=$(tail -n +2 RELEASE.md)
+          echo "::set-output name=update::$content"
+          content=$(head -n 1 RELEASE.md)
+          echo "::set-output name=title::$content"
+
       
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.TOKEN }}
           file: ${{ github.workspace }}/build/bin/${{ matrix.config.artifact }}.zip
-          tag: ${{ github.ref }}
+          tag: ${{ steps.read_release.outputs.title }}
           overwrite: true
-          body: "This is my release text"
+          body: ${{ steps.read_release.outputs.update }}
